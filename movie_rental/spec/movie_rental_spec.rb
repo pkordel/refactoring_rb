@@ -3,6 +3,7 @@ require "ostruct"
 require "debugger"
 require_relative "../customer"
 require_relative "../movie"
+require_relative "../rental"
 
 describe Customer do
   subject { Customer.new("Bob") }
@@ -32,7 +33,7 @@ describe Customer do
       let(:regular_movie) {
         Movie.new(title: "Days of Thunder", price_code: Movie::REGULAR)
       }
-      let(:rental) { OpenStruct.new(movie: regular_movie, days_rented: 1) }
+      let(:rental) { Rental.new(movie: regular_movie, days_rented: 1) }
       before { subject.add_rental rental }
 
       it "calculates correctly for 1 day" do
@@ -51,7 +52,7 @@ describe Customer do
       let(:new_release) {
         Movie.new(title: "Days of Thunder", price_code: Movie::NEW_RELEASE)
       }
-      let(:rental) { OpenStruct.new(movie: new_release, days_rented: 1) }
+      let(:rental) { Rental.new(movie: new_release, days_rented: 1) }
       before { subject.add_rental rental }
 
       it "calculates correctly for 1 day" do
@@ -70,7 +71,7 @@ describe Customer do
       let(:childrens_movie) {
         Movie.new(title: "Days of Thunder", price_code: Movie::CHILDRENS)
       }
-      let(:rental) { OpenStruct.new(movie: childrens_movie, days_rented: 1) }
+      let(:rental) { Rental.new(movie: childrens_movie, days_rented: 1) }
       before { subject.add_rental rental }
 
       it "calculates correctly for less than 3 days" do
