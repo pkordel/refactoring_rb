@@ -18,3 +18,8 @@ later refactoring.
 ## Step four: Extract and Move Method
 
 Extract frequent renter point calculation and move to Rental.
+
+## Step five: Replace Temp with Query
+
+Create methods for total charge and total frequent renter points.
+Replace local temps with calculations.
