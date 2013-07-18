@@ -14,3 +14,7 @@ a better home.
 Remove redundant local variable amount with new method call on rental object.
 The performance penalty of calculating amount due will be addressed in a
 later refactoring.
+
+## Step four: Extract and Move Method
+
+Extract frequent renter point calculation and move to Rental.

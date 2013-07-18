@@ -16,13 +16,7 @@ class Customer
     result                 = "Rental Record for #{name}\n"
 
     rentals.each do |rental|
-      # Add frequent renter points
-      frequent_renter_points += 1
-      # Add bonus for a two day new release
-      if rental.movie.price_code == Movie::NEW_RELEASE &&
-        rental.days_rented > 1
-        frequent_renter_points += 1
-      end
+      frequent_renter_points += rental.calculate_frequent_renter_points
 
       # Show figures for this rental
       result << "\t#{rental.movie.title}\t#{rental.calculate_amount_due}\n"
