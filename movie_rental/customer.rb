@@ -16,7 +16,7 @@ class Customer
     result                 = "Rental Record for #{name}\n"
 
     rentals.each do |rental|
-      amount = calculate_amount_due(rental)
+      amount = rental.calculate_amount_due
 
       # Add frequent renter points
       frequent_renter_points += 1
@@ -34,25 +34,6 @@ class Customer
     # Add footer lines
     result << "Amount owed is #{total_amount}\n"
     result << "You earned #{frequent_renter_points} frequent renter points"
-    result
-  end
-
-  def calculate_amount_due(rental)
-    result = 0.0
-    case rental.movie.price_code
-    when Movie::REGULAR
-      result += 2
-      if rental.days_rented > 2
-        result += (rental.days_rented - 2) * 1.5
-      end
-    when Movie::NEW_RELEASE
-      result += rental.days_rented * 3
-    when Movie::CHILDRENS
-      result += 1.5
-      if rental.days_rented > 3
-        result += (rental.days_rented - 3) * 1.5
-      end
-    end
     result
   end
 end
