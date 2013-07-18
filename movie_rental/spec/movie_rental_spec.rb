@@ -85,7 +85,67 @@ describe Customer do
         subject.statement.must_match /You earned 1 frequent renter points/
       end
     end
+  end
 
+  describe ".html_statement" do
+
+    describe "regular movie" do
+      let(:regular_movie) {
+        Movie.new(title: "Days of Thunder", price_code: Movie::REGULAR)
+      }
+      let(:rental) { Rental.new(movie: regular_movie, days_rented: 1) }
+      before { subject.add_rental rental }
+
+      it "calculates correctly for 1 day" do
+        subject.html_statement.must_match(/You owe <em>2.0<\/em>/)
+        subject.html_statement.must_match(/<em>1<\/em> frequent renter points/)
+      end
+
+      it "calculates correctly for more then 2 days" do
+        rental.days_rented = 3
+        subject.html_statement.must_match(/You owe <em>3.5<\/em>/)
+        subject.html_statement.must_match(/<em>1<\/em> frequent renter points/)
+      end
+    end
+
+    describe "new release" do
+      let(:new_release) {
+        Movie.new(title: "Days of Thunder", price_code: Movie::NEW_RELEASE)
+      }
+      let(:rental) { Rental.new(movie: new_release, days_rented: 1) }
+      before { subject.add_rental rental }
+
+      it "calculates correctly for 1 day" do
+        subject.html_statement.must_match(/You owe <em>3.0<\/em>/)
+        subject.html_statement.must_match(/<em>1<\/em> frequent renter points/)
+      end
+
+      it "calculates correctly for 2 days" do
+        rental.days_rented = 2
+        subject.html_statement.must_match(/You owe <em>6.0<\/em>/)
+        subject.html_statement.must_match(/<em>2<\/em> frequent renter points/)
+      end
+    end
+
+    describe "children's movie" do
+      let(:childrens_movie) {
+        Movie.new(title: "Days of Thunder", price_code: Movie::CHILDRENS)
+      }
+      let(:rental) { Rental.new(movie: childrens_movie, days_rented: 1) }
+      before { subject.add_rental rental }
+
+      it "calculates correctly for less than 3 days" do
+        subject.html_statement.must_match(/You owe <em>1.5<\/em>/)
+        subject.html_statement.must_match(/<em>1<\/em> frequent renter points/)
+      end
+
+      it "calculates correctly for more then 3 days" do
+        rental.days_rented = 4
+        puts subject.html_statement
+        subject.html_statement.must_match(/You owe <em>3.0<\/em>/)
+        subject.html_statement.must_match(/<em>1<\/em> frequent renter points/)
+      end
+    end
   end
 
 end

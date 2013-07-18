@@ -23,3 +23,7 @@ Extract frequent renter point calculation and move to Rental.
 
 Create methods for total charge and total frequent renter points.
 Replace local temps with calculations.
+
+## Step six: Add html statement method
+
+Create method to output an html-formatted report.
