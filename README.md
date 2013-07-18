@@ -27,3 +27,8 @@ Replace local temps with calculations.
 ## Step six: Add html statement method
 
 Create method to output an html-formatted report.
+
+## Step seven: Move Method
+
+In anticipation of refactoring movie type change management, we're
+moving the switch statement from Rental to Movie.
