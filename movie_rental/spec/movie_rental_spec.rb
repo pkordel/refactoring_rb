@@ -141,7 +141,6 @@ describe Customer do
 
       it "calculates correctly for more then 3 days" do
         rental.days_rented = 4
-        puts subject.html_statement
         subject.html_statement.must_match(/You owe <em>3.0<\/em>/)
         subject.html_statement.must_match(/<em>1<\/em> frequent renter points/)
       end
