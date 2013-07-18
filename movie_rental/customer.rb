@@ -16,8 +16,6 @@ class Customer
     result                 = "Rental Record for #{name}\n"
 
     rentals.each do |rental|
-      amount = rental.calculate_amount_due
-
       # Add frequent renter points
       frequent_renter_points += 1
       # Add bonus for a two day new release
@@ -27,8 +25,8 @@ class Customer
       end
 
       # Show figures for this rental
-      result << "\t#{rental.movie.title}\t#{amount}\n"
-      total_amount += amount
+      result << "\t#{rental.movie.title}\t#{rental.calculate_amount_due}\n"
+      total_amount += rental.calculate_amount_due
     end
 
     # Add footer lines
