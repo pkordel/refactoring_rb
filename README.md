@@ -31,4 +31,8 @@ Create method to output an html-formatted report.
 ## Step seven: Move Method
 
 In anticipation of refactoring movie type change management, we're
-moving the switch statement from Rental to Movie.
+moving the case statement from Rental to Movie.
+
+## Step eight: Replace Type Code with State/Strategy
+
+Removes case statement. Injecting price types into Movie.
